@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "340787453112",
+    "firebase_url": "https://new-gtwa-vijayanagar-staff.firebaseio.com",
+    "project_id": "new-gtwa-vijayanagar-staff",
+    "storage_bucket": "new-gtwa-vijayanagar-staff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340787453112:android:4380d1647e0ce9f427a84d",
+        "android_client_info": {
+          "package_name": "info.passdaily.st_therese_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340787453112-u6dq67laq09sge1put5a4hvc0kdjht3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjJRdC8NNCE8W4pb9mhZTCRp0T_ALhdHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340787453112-u6dq67laq09sge1put5a4hvc0kdjht3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
