@@ -1,5 +1,8 @@
 package info.passdaily.st_therese_app.services.retrofit
 
+import info.passdaily.saint_thomas_app.model.FeesDetailPaidModel
+import info.passdaily.saint_thomas_app.model.FeesDetailsModel
+import info.passdaily.saint_thomas_app.model.PayFeesModel
 import info.passdaily.st_therese_app.model.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -641,6 +644,23 @@ interface ApiInterface {
         @Query("StudentRollNo") StudentRollNo: Int
         //category
     ): Response<FeesDetailsModel>
+
+
+    ///http://holyapp.passdaily.in/PassDailyParentsApi/Fees/PayFeeStupGet?StudentId=741&ClassId=55
+    @GET("Fees/PayFeeStupGet")
+    suspend fun payFeesDetails(
+        @Query("StudentId") StudentId: Int,
+        @Query("ClassId") ClassId: Int
+        //category
+    ): Response<PayFeesModel>
+
+
+    @GET("Fees/FeesPaidDetailsForPrint")
+    suspend fun feesPaidDetails(
+        @Query("StudentId") StudentId: Int,
+        @Query("ReceiptId") ReceiptId: Int
+        //category
+    ): Response<FeesDetailPaidModel>
 
 
     ////Exam/ExamNameGet?ExamId=0

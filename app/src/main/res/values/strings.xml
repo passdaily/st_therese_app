@@ -484,6 +484,8 @@
     <string name="clear">Clear</string>
     <string name="done">Done</string>
     <string name="select_page">Select Page</string>
+    <string name="select_term">Select Term</string>
+
     <string name="question">Questions</string>
     <string name="confirm">Confirm</string>
     <string name="exams">Exams</string>

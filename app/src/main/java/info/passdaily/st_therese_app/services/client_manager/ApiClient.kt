@@ -193,6 +193,14 @@ class ApiClient( private val apiServices  : ApiInterface) {
     suspend fun getFeesDetails(CLASSID : Int,ACADEMICID: Int,STUDENTID: Int,STUDENT_ROLL_NO : Int)
             = apiServices.feesDetails(CLASSID,ACADEMICID,STUDENTID,STUDENT_ROLL_NO)
 
+
+    suspend fun getFeesPaidDetails(STUDENTID: Int,ReceiptId : Int)
+            = apiServices.feesPaidDetails(STUDENTID,ReceiptId)
+
+
+    suspend fun getPayFeesDetails(STUDENTID: Int,CLASSID : Int)
+            = apiServices.payFeesDetails(STUDENTID,CLASSID)
+
     suspend fun getExamList(examId : Int) = apiServices.examDetailsList(examId)
 
     suspend fun getExamMarkDetails(

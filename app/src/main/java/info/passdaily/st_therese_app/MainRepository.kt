@@ -201,6 +201,12 @@ class MainRepository(val apiHelper: ApiClient) {
     suspend fun getFeesDetails(CLASSID : Int,ACADEMICID: Int,STUDENTID: Int,STUDENT_ROLL_NO : Int)
             = apiHelper.getFeesDetails(CLASSID,ACADEMICID,STUDENTID,STUDENT_ROLL_NO)
 
+    suspend fun getFeesPaidDetails(STUDENTID: Int,ReceiptId : Int)
+            = apiHelper.getFeesPaidDetails(STUDENTID,ReceiptId)
+
+
+    suspend fun getPayFeesDetails(STUDENTID: Int,CLASSID : Int)
+            = apiHelper.getPayFeesDetails(STUDENTID,CLASSID)
     ///
     suspend fun getExamList(examId : Int) = apiHelper.getExamList(examId)
 

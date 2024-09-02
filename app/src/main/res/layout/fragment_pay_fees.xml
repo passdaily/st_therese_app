@@ -4,19 +4,395 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".typeofuser.parent.fees.PayFeesFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:background="@color/gray_100"
+    android:id="@+id/constraintLayout"
+    tools:context=".typeofuser.parent.study_material.StudyMaterialInit">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="@dimen/text_size_04"
-        android:text="This Option Coming Soon"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.01" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.99" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.01" />
+
+
+    <!--    shimmer -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:visibility="gone"
+        android:id="@+id/shimmerViewContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_load_layout" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <!--    empty response-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/constraintEmpty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5">
+
+
+        <ImageView
+            android:id="@+id/imageViewEmpty"
+            android:layout_width="@dimen/fourth_box_size"
+            android:layout_height="@dimen/fourth_box_size"
+            android:src="@drawable/ic_empty_state_library"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.39" />
+
+        <TextView
+            android:id="@+id/textEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="No Result found"
+            android:textColor="@color/gray_400"
+            android:textSize="@dimen/text_size_04"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewEmpty"
+            app:layout_constraintStart_toStartOf="@+id/imageViewEmpty"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewEmpty" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    Native layout-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/constraintLayoutNative"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5">
+
+
+        <RelativeLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/bg_spinner"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginBottom="3dp">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinnerAcademic"
+                    style="@style/spinner_style2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="-3dp"
+                android:background="@color/white"
+                android:fontFamily="@font/poppins_light_italic"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:text="@string/select_term"
+                android:textColor="@color/dark_gray_700"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout41"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+
+
+            <TextView
+                android:id="@+id/textView129"
+                android:layout_width="0dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Tuition Fees"
+                android:textColor="@color/gray_400"
+                android:textSize="@dimen/text_size_02"
+                app:layout_constraintBottom_toBottomOf="@+id/checkBox2"
+                app:layout_constraintEnd_toStartOf="@+id/textView130"
+                app:layout_constraintStart_toEndOf="@+id/checkBox2"
+                app:layout_constraintTop_toTopOf="@+id/checkBox2" />
+
+            <TextView
+                android:id="@+id/textView130"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:drawableStart="@drawable/ic_rupee_black_icon"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="end"
+                android:text="500.00   "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_02"
+                app:layout_constraintBottom_toBottomOf="@+id/textView129"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView129"
+                app:layout_constraintTop_toTopOf="@+id/textView129" />
+
+            <TextView
+                android:id="@+id/textView157"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Admission Fees"
+                android:textColor="@color/gray_400"
+                android:textSize="@dimen/text_size_02"
+                app:layout_constraintBottom_toBottomOf="@+id/checkBox3"
+                app:layout_constraintEnd_toEndOf="@+id/textView129"
+                app:layout_constraintStart_toStartOf="@+id/textView129"
+                app:layout_constraintTop_toTopOf="@+id/checkBox3" />
+
+            <TextView
+                android:id="@+id/textView159"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_rupee_black_icon"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="end"
+                android:text="700.00   "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_02"
+                app:layout_constraintBottom_toBottomOf="@+id/textView157"
+                app:layout_constraintEnd_toEndOf="@+id/textView130"
+                app:layout_constraintStart_toStartOf="@+id/textView130"
+                app:layout_constraintTop_toTopOf="@+id/textView157" />
+
+            <TextView
+                android:id="@+id/textView170"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Bus Fees"
+                android:textColor="@color/gray_400"
+                android:textSize="@dimen/text_size_02"
+                app:layout_constraintBottom_toBottomOf="@+id/checkBox4"
+                app:layout_constraintEnd_toEndOf="@+id/textView157"
+                app:layout_constraintStart_toStartOf="@+id/textView157"
+                app:layout_constraintTop_toTopOf="@+id/checkBox4" />
+
+            <TextView
+                android:id="@+id/textView171"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_rupee_black_icon"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="end"
+                android:text="800.00   "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_02"
+                app:layout_constraintBottom_toBottomOf="@+id/textView170"
+                app:layout_constraintEnd_toEndOf="@+id/textView159"
+                app:layout_constraintStart_toStartOf="@+id/textView159"
+                app:layout_constraintTop_toTopOf="@+id/textView170" />
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/checkBox2"
+                app:layout_constraintStart_toStartOf="@+id/checkBox2"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+
+            <CheckBox
+                android:id="@+id/checkBox4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/checkBox3"
+                app:layout_constraintStart_toStartOf="@+id/checkBox3"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout41"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/textView124"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Total Amount"
+                android:textColor="@color/gray_400"
+                android:textSize="@dimen/text_size_05"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView127"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.308" />
+
+            <TextView
+                android:id="@+id/textView127"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:drawableStart="@drawable/ic_rupee_black_icon"
+                android:drawablePadding="4dp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="end"
+                android:text="500.00   "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_05"
+                app:layout_constraintBottom_toBottomOf="@+id/textView124"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView124"
+                app:layout_constraintTop_toTopOf="@+id/textView124" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSubmit"
+            style="@style/RoundedCornerButtonGreen600"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Pay Now"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_02"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    web view-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/constraintLayoutWebView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5">
+
+        <WebView
+            android:id="@id/webView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        </WebView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    Browser-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/constraintLayoutBrowser"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline5">
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonBrowser"
+            style="@style/RoundedCornerButtonGray300rad"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:drawableStart="@drawable/ic_refresh"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:text="Click to Browse"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_04"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

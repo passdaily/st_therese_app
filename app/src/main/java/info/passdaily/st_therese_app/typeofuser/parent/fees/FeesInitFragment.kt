@@ -10,12 +10,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayout
+import info.passdaily.saint_thomas_app.model.FeesDetailsModel
+import info.passdaily.saint_thomas_app.model.PayFeesModel
 import info.passdaily.st_therese_app.R
 import info.passdaily.st_therese_app.databinding.FeeInitFragmentBinding
 import info.passdaily.st_therese_app.model.*
@@ -25,12 +27,12 @@ import info.passdaily.st_therese_app.services.ViewModelFactory
 import info.passdaily.st_therese_app.services.client_manager.ApiClient
 import info.passdaily.st_therese_app.services.client_manager.NetworkLayer
 import info.passdaily.st_therese_app.services.localDB.parent.StudentDBHelper
-import info.passdaily.st_therese_app.typeofuser.parent.absent.ItemClickListener
 import kotlinx.coroutines.*
+
 
 @DelicateCoroutinesApi
 @Suppress("DEPRECATION")
-class FeesInitFragment : Fragment() {
+class FeesInitFragment : Fragment(),FeesInitFragmentListener{
 
     var TAG = "GalleryImageFragment"
 
@@ -45,8 +47,9 @@ class FeesInitFragment : Fragment() {
     var viewPager: ViewPager? = null
     var tabLayout: TabLayout? = null
 
-    var feesDetailsModel = ArrayList<FeesDetailsModel.FeesPaidDetail>()
 
+
+    var payFeesModel : PayFeesModel? = null
 
     var constraintEmpty: ConstraintLayout? = null
     var imageViewEmpty: ImageView? = null
@@ -54,7 +57,7 @@ class FeesInitFragment : Fragment() {
     var accedemicId = 0
     var recyclerView : RecyclerView? =null
 
-    var shimmerViewContainer : ShimmerFrameLayout? =null
+//    var shimmerViewContainer : ShimmerFrameLayout? =null
 
     private lateinit var feesDetailViewModel: FeesDetailViewModel
 
@@ -99,12 +102,20 @@ class FeesInitFragment : Fragment() {
         textViewTitle.text ="Fees Details"
 
 
+        tabLayout =  binding.tabLayout
+        viewPager =  binding.viewPager
 
-
-        tabLayout = view.findViewById(R.id.tabLayout)
-        viewPager = view.findViewById(R.id.viewPager)
 //        recyclerViewAbsentList?.layoutManager = GridLayoutManager(requireActivity(),2)
         initMethod()
+
+
+        feesDetailViewModel.payFeesDetails.observe(viewLifecycleOwner) { response ->
+            payFeesModel = response
+            // Handle the response here
+        }
+
+        // Load data when needed (e.g., when the fragment is created or a button is clicked)
+        feesDetailViewModel.loadData(STUDENTID, CLASSID)
 
     }
 
@@ -114,42 +125,42 @@ class FeesInitFragment : Fragment() {
         feesDetailViewModel.getFeesDetails(CLASSID,ACADEMICID,STUDENTID,STUDENT_ROLL_NO)
             .observe(requireActivity(), Observer {
                 it?.let { resource ->
+                    Log.i(TAG,"$resource");
                     when (resource.status) {
                         Status.SUCCESS -> {
                             val response = resource.data?.body()!!
-                            feesDetailsModel = response.feesPaidDetails
+                            Global.feesDetailsModel = response.feesPaidDetails
                             getResult()
                         }
                         Status.ERROR -> {
                            Log.i(TAG,"ERROR ")
-
                         }
                         Status.LOADING -> {
-                            feesDetailsModel = ArrayList<FeesDetailsModel.FeesPaidDetail>()
+                            Global.feesDetailsModel = ArrayList<FeesDetailsModel.FeesPaidDetail>()
                         }
                     }
                 }
             })
     }
 
-
-
-
     private fun getResult(){
+
+        Global.tabController = 1;
 
             val adapter = Global.MyPagerAdapter(childFragmentManager)
             adapter.addFragment(
-                PayFeesFragment(),
+                PayFeesFragment(this,payFeesModel, viewPager?.currentItem!!),
                 resources.getString(R.string.payfee)
             )
             adapter.addFragment(
-                FeesDetailFragment(feesDetailsModel),
+                FeesDetailFragment(),
                 resources.getString(R.string.pay_history)
             )
-           shimmerViewContainer?.visibility = View.GONE
-            // adapter.addFragment(new DMKOfficial(), "Tweets");
+//           shimmerViewContainer?.visibility = View.GONE
+
             viewPager?.adapter = adapter
             viewPager?.currentItem = 1
+
             tabLayout?.setupWithViewPager(viewPager)
 
             viewPager?.addOnPageChangeListener(
@@ -159,12 +170,42 @@ class FeesInitFragment : Fragment() {
             )
             tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    viewPager?.currentItem = tab.position
+                    viewPager?.setCurrentItem(tab.position, true)
+                    Global.tabController = tab.position;
+                    Log.i(TAG,"position ${ tab.position}");
+
+                    // Refresh fragment when tab is selected
+                    val fragment = adapter.getItem(tab.position)
+                    if (fragment is PayFeesFragment) {
+                        fragment.refreshContent()
+                    } else if (fragment is FeesDetailFragment) {
+                        fragment.refreshContent()
+                    }
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {}
                 override fun onTabReselected(tab: TabLayout.Tab) {}
             })
+
+
+
+//        viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+//
+//            override fun onPageSelected(position: Int) {
+//                val fragment = adapter.getItem(position)
+//                if (fragment is PayFeesFragment) {
+//                    fragment.refreshContent()
+//                } else if (fragment is FeesDetailFragment) {
+//                    fragment.refreshContent()
+//                }
+//            }
+//
+//            override fun onPageScrollStateChanged(state: Int) {}
+//        })
+
+
+
 
     }
 
@@ -180,4 +221,42 @@ class FeesInitFragment : Fragment() {
         mContext = null
         Log.i(TAG,"onDestroy ")
     }
+
+    override fun onBackPressed(message: String) {
+//        CoroutineScope(Dispatchers.Main).launch {
+//            loadMethod()
+//        }
+        viewPager?.setCurrentItem(1, true)
+    }
+
+
+
+
+    private fun loadMethod() {
+        //Fees/FeesPaidListGet?ClassId=1&AccademicId=8&StudentId=533&StudentRollNo=1
+        feesDetailViewModel.getFeesDetails(CLASSID,ACADEMICID,STUDENTID,STUDENT_ROLL_NO)
+            .observe(requireActivity(), Observer {
+                it?.let { resource ->
+                    Log.i(TAG,"$resource");
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            val response = resource.data?.body()!!
+                            Global.feesDetailsModel = response.feesPaidDetails
+
+                        }
+                        Status.ERROR -> {
+                            Log.i(TAG,"ERROR ")
+                        }
+                        Status.LOADING -> {
+                            Global.feesDetailsModel = ArrayList<FeesDetailsModel.FeesPaidDetail>()
+                        }
+                    }
+                }
+            })
+    }
 }
+
+interface FeesInitFragmentListener{
+    fun onBackPressed(message : String)
+}
+

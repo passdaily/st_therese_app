@@ -3,6 +3,7 @@ package info.passdaily.st_therese_app.services
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import info.passdaily.saint_thomas_app.model.FeesDetailsModel
 import info.passdaily.st_therese_app.model.*
 import info.passdaily.st_therese_app.typeofuser.common_staff_admin.exam_center.exam_grade.GradeCommonModel
 
@@ -62,6 +63,15 @@ class Global {
         var albumImageList =  ArrayList<CustomImageModel>()
 
         var getGradeMark = ArrayList<ArrayList<GradeCommonModel.GradeList>>()
+
+
+        ///
+///
+        var feesDetailsModel = ArrayList<FeesDetailsModel.FeesPaidDetail>()
+
+        //pay fees
+        var tabController  = 1;
+
 
 
         var blockDetailsModel = ArrayList<BlockDetailsModel.BlockDetail>()

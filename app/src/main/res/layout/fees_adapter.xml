@@ -127,17 +127,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:ellipsize="end"
             android:fontFamily="@font/poppins_bold"
             android:maxLines="1"
             android:text="Student Name"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_05"
+            android:textSize="@dimen/text_size_02"
             app:layout_constraintEnd_toStartOf="@+id/cardViewStatus"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewFeesType" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewStatus"
@@ -172,14 +172,13 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/textBalance"
+            android:id="@+id/textViewPaymentMode"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/poppins_medium"
             android:maxLines="1"
             android:gravity="center_vertical"
-            android:text="Balance Amount: 8,000"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_02"
             app:layout_constraintBottom_toBottomOf="@+id/textPaidAmount"
@@ -200,9 +199,9 @@
             android:gravity="center"
             android:text="2,000"
             android:textColor="@color/pd_green_200"
-            android:textSize="@dimen/text_size_08"
+            android:textSize="@dimen/text_size_06"
             app:layout_constraintEnd_toEndOf="@+id/cardViewStatus"
-            app:layout_constraintStart_toEndOf="@+id/textBalance"
+            app:layout_constraintStart_toEndOf="@+id/textViewPaymentMode"
             app:layout_constraintTop_toBottomOf="@+id/textStudentName" />
 
         <TextView
@@ -211,15 +210,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins_medium"
             android:maxLines="1"
-            android:text="Payment Mode : UPI"
             android:textColor="@color/gray_900"
             android:textSize="@dimen/text_size_02"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayoutDown"
             app:layout_constraintEnd_toStartOf="@+id/textViewDate"
-            app:layout_constraintStart_toStartOf="@+id/textBalance"
+            app:layout_constraintStart_toStartOf="@+id/textViewPaymentMode"
             app:layout_constraintTop_toBottomOf="@+id/textPaidAmount" />
 
         <TextView
@@ -237,6 +235,115 @@
             app:layout_constraintEnd_toEndOf="@+id/textPaidAmount"
             app:layout_constraintStart_toEndOf="@+id/textPaymentMode"
             app:layout_constraintTop_toTopOf="@+id/textPaymentMode" />
+
+        <TextView
+            android:id="@+id/textViewFeesType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/poppins_bold"
+            android:maxLines="1"
+            android:text="Academic Fees"
+            android:textColor="@color/green_400"
+            android:textSize="@dimen/text_size_02"
+            app:layout_constraintEnd_toStartOf="@+id/textViewAcademic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewAcademic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/poppins_bold"
+            android:maxLines="1"
+            android:text="2024-2025"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_02"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewFeesType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewFeesType"
+            app:layout_constraintTop_toTopOf="@+id/textViewFeesType" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutDown"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textViewDate"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textPaymentMode"
+            app:layout_constraintTop_toBottomOf="@+id/textPaymentMode"
+            app:layout_constraintVertical_bias="0.108">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout43"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout42"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonDownload"
+                    style="@style/RoundedCornerButtonRedFresh"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/screen_width"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Download"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_04"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout42"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/constraintLayout43"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonDownloadReceipt"
+                    style="@style/RoundedCornerButtonGreenFresh"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/screen_width"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Receipt"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_04"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
